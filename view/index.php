@@ -1,19 +1,19 @@
 <?php
-$title = 'Login System || Index Page';
+$title = 'Index Page || Login System';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include('../view/part/meta.php');?>
+    <?=page::meta()?>
     <title><?=$title?></title>
-    <?php include('../view/part/style.php');?>
-    <?php include('../view/part/javascript.php');?>
+    <?=page::style()?>
+    <?=page::javascript()?>
 </head>
 <body>
-    <?php page::header();?>
+    <?=page::header()?>
     <main>
         <h1>Login System Index Page</h1>
     </main>
-    <?php page::footer();?>
+    <?=page::footer()?>
 </body>
 </html>

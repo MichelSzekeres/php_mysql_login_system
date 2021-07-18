@@ -8,6 +8,8 @@ session_start(); #start session in here as all pages are processed over.
 error_reporting(E_ALL); #in production set this one to 0 IMPORTANT!!!
 ob_start("page::sanitize_output"); #sanitize HTML output and compress it using class page sanitize_output function
 
+page::is_index();
+
 switch(page::path()):
     case '/': include('../view/index.php'); break;
     case '/logout': include('../view/logout.php'); break;

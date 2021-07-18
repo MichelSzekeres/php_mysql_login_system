@@ -24,6 +24,6 @@ class user extends database{
     }
     public static function is_logged_in(){
         // change these based on inserted started sessions.
-        return isset($_SESSION['username']) || isset($_SESSION['first_name']) || isset($_SESSION['last_name']) || isset($_SESSION['email']) ? true : false;
+        return isset($_SESSION['username']) || isset($_SESSION['first_name']) || isset($_SESSION['last_name']) || isset($_SESSION['email']) ? false : true;
     }
 }

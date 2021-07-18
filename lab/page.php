@@ -6,6 +6,12 @@ class page{
     public static function full_url(){
         return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     }
+    public static function url(){
+        return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+    }
+    public static function is_index(){
+        if(!defined('index') || index != true){ include('../view/error/404.php'); }
+    }
     public static function is_domain($domain){
         #check is variable matches the host network domain
         return ($_SERVER['HTTP_HOST'] == $domain);
