@@ -1,6 +1,7 @@
 <?php
 $title = 'Sign In || Login System';
 user::login();
+#only access if user is not logged in
 user::is_logged_in() ? header("Location: ".page::url()).die(): false;
 ?>
 <!DOCTYPE html>

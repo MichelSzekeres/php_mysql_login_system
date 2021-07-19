@@ -1,5 +1,56 @@
 <?php
 class user extends database{
+    public static function signup(){
+        #check request method
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            #check post name matches
+            $all_post_correct = isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['uemail']) && isset($_POST['password']) && isset($_POST['repassword']);
+            $all_post_correct ? true:die('Post names are not matching');
+            #check password is matches
+            $password_match = $_POST['password'] == $_POST['repassword'];
+            $password_match ? true:die('Passwords are not matching');
+            #add post to variables
+            $lname = $_POST['lname'];
+            $fname = $_POST['fname'];
+            $email = $_POST['uemail'];
+            $password = $_POST['password'];
+            #check password is password longer than 4 (5 or more)
+            $minlen = strlen($password) > 4;
+            #check is up numbers/caracters
+            $number = preg_match('~[0-9]+~', $password);
+            $uppercase = preg_match('/[A-Z]/', $password);
+            #check passwords
+            $password_valid = $minlen && $number && $uppercase;
+            // password is currently not checking but feel free to activate
+            $password_valid ? true :false;
+            #check is email all ready exists
+            #check database connection if not connected connect to default database
+            isset(parent::$conn) ? true : parent::connect();
+            #set database
+            parent::select_db(user_db);
+            #query to execute
+            $sql = "SELECT * FROM users WHERE email = (?)";
+            #prepare data to check
+            $stmt = parent::$conn->prepare($sql);
+            $stmt->bind_param('s',$email);
+            $stmt->execute();
+            #get the result from the query
+            $result = $stmt->get_result();
+            if($result->num_rows == 0){
+                $hashedPassword = password_hash($password,PASSWORD_DEFAULT);
+                $sql_insert = "INSERT INTO users (first_name, last_name, email, password) VALUES (?,?,?,?)";
+                $stmt->prepare($sql_insert);
+                $stmt->bind_param('ssss',$fname,$lname,$email,$hashedPassword);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                print_r($result);
+                $stmt->close();
+                header('Location:'.page::url().'/sign-in?sign-up=true');
+            }else{
+                header('Location:'.page::url().'/sign-up?email=false');
+            }
+        }
+    }
 
     public static function login(){
         #check request method

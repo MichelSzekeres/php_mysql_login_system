@@ -1,6 +1,6 @@
 <?php
 $title = 'Sign Up || Login System';
-#if user is logged in redirect
+#only access if user is not logged in
 user::is_logged_in() ? header("Location: ".page::url()).die(): false;
 ?>
 <!DOCTYPE html>
@@ -23,11 +23,11 @@ user::is_logged_in() ? header("Location: ".page::url()).die(): false;
                     <span>First Name</span>
                 </lable></br>
                 <lable class="input">
-                    <input type="email" name="lname" id="l-u-lname" placeholder=" ">
+                    <input type="text" name="lname" id="l-u-lname" placeholder=" ">
                     <span>Last Name</span>
                 </lable></br>
                 <lable class="input">
-                    <input type="email" name="username" id="l-u-email" placeholder=" ">
+                    <input type="email" name="uemail" id="l-u-email" placeholder=" ">
                     <span>Enter Email</span>
                 </lable></br>
                 <lable class="input">
