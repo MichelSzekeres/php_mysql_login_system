@@ -1,5 +1,7 @@
 <?php
-$title = ' Sign Up || Login System';
+$title = 'Sign Up || Login System';
+#if user is logged in redirect
+user::is_logged_in() ? header("Location: ".page::url()).die(): false;
 ?>
 <!DOCTYPE html>
 <html lang="en">

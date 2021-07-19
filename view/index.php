@@ -12,7 +12,15 @@ $title = 'Index Page || Login System';
 <body>
     <?=page::header()?>
     <main>
-        <h1>Login System Index Page</h1>
+        <?php if(user::is_logged_in()){ ?>
+
+            <h1>Welcome <?=$_SESSION['first_name'].' '.$_SESSION['last_name'];?> </h1>
+            
+        <?php }else{ ?>
+
+            <h1>Login System Index Page</h1>
+            
+        <?php } ?>
     </main>
     <?=page::footer()?>
 </body>

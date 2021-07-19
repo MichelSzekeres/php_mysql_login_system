@@ -1,5 +1,7 @@
 <?php
 $title = 'Sign In || Login System';
+user::login();
+user::is_logged_in() ? header("Location: ".page::url()).die(): false;
 ?>
 <!DOCTYPE html>
 <html lang="en">
